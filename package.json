@@ -1,0 +1,24 @@
+{
+  "name": "pomodoro",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  },
+  "devDependencies": {
+    "autoprefixer-stylus": "^0.13.0",
+    "concurrently": "^3.4.0",
+    "react-scripts": "0.9.5",
+    "stylus": "^0.54.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "watch": "concurrently --names \"webpack, stylus\" --prefix name \"npm run start\" \"npm run styles:watch\"",
+    "styles": "stylus -u autoprefixer-stylus ./src/styles/main.styl -o ./src/styles/main.css",
+    "styles:watch": "stylus -u autoprefixer-stylus -w ./src/styles/main.styl -o ./src/styles/main.css",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
