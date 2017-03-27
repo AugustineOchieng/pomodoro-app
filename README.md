@@ -2,7 +2,14 @@
 
 Built with JavaScript and React.js.
 
+## Dev
 
+To run the dev server including watching for `.styl` changes:
+
+```bash
+$ npm run watch
+```
+ 
 
 ***
 
