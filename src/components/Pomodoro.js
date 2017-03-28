@@ -4,7 +4,7 @@ class Pomodoro extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      timer: 5,
+      timer: 15,
       break: 3
     };
 
@@ -31,6 +31,7 @@ class Pomodoro extends React.Component {
   countdownPomodoro() {
     if (this.state.timer < 1) {
       clearInterval(this.pTimerID);
+      this.playSoundBreak();
       this.startBreak();
       return;
     }
@@ -48,6 +49,7 @@ class Pomodoro extends React.Component {
 
   countdownBreak() {
     if (this.state.break < 1) {
+      this.playSoundWork();
       clearInterval(this.bTimerID);
       return;
     }
@@ -94,6 +96,14 @@ class Pomodoro extends React.Component {
     }));
   }
 
+  playSoundBreak() {
+    document.getElementById('break').play();
+  }
+
+  playSoundWork() {
+    document.getElementById('work').play();
+  }
+
 
   formatTime(seconds) {
     const minutes = Math.floor(seconds / 60);
@@ -119,6 +129,10 @@ class Pomodoro extends React.Component {
           <button onClick={this.startPomodoro} className="btn sq-button">Start Pomodoro!</button>
           <button onClick={this.pauseButton} className="btn sq-button">Pause</button>
           <button onClick={this.resetButton} className="btn sq-button">Reset</button>
+        </div>
+        <div>
+          <audio id="work" preload="auto" src="https://tinyurl.com/k6nb3zu"/>
+          <audio id="break" preload="auto" src="https://tinyurl.com/mbyaqqf"/>
         </div>
       </div>
 
