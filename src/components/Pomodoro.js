@@ -26,13 +26,19 @@ class Pomodoro extends React.Component {
       break: prevState.break - 1
     }));
   }
+
+  formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const secondsRemain = Math.round(seconds % 60);
+    return `${minutes}:${secondsRemain < 10 ? '0' : ''}${secondsRemain}`;
+  }
  
   render() {
     return (
       <div>
         <div className="default">Pomodoro Timer</div>
-        <div>{(this.state.timer)}</div>
-        <div>{(this.state.break)}</div>
+        <div>{this.formatTime(this.state.timer)}</div>
+        <div>{this.formatTime(this.state.break)}</div>
       </div>
 
     )
