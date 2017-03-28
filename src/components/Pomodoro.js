@@ -22,6 +22,7 @@ class Pomodoro extends React.Component {
   }
 
   startPomodoro() {
+    clearInterval(this.pTimerID);
     this.pTimerID = setInterval(
       () => this.countdownPomodoro(),
       1000
