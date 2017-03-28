@@ -4,8 +4,8 @@ class Pomodoro extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      timer: 15,
-      break: 3
+      timer: 1500,
+      break: 300
     };
 
     // bind helpers i.e. allows use of 'this' for custom methods
@@ -113,22 +113,27 @@ class Pomodoro extends React.Component {
  
   render() {
     return (
-      <div>
-        <div className="controls">
-          <button onClick={this.incPomodoro} className="btn round-btn">+ P</button>
-          <button onClick={this.decPomodoro} className="btn round-btn">- P</button>
-          <button onClick={this.incBreak} className="btn round-btn">+ B</button>
-          <button onClick={this.decBreak} className="btn round-btn">- B</button>
+      <div className="pomodoro-wrapper">
+        <div className="duration-controls-wrapper">
+          <div>
+            <p className="title">Pomodoro</p>
+            <button onClick={this.incPomodoro} className="round-btn">+</button>
+            <button onClick={this.decPomodoro} className="round-btn">-</button>
+          </div>
+          <div>
+            <p className="title">Break</p>
+            <button onClick={this.incBreak} className="round-btn">+</button>
+            <button onClick={this.decBreak} className="round-btn">-</button>
+          </div>
         </div>
         <div className="display-timer">
-          <div>Pomodoro Timer</div>
-          <div>{this.formatTime(this.state.timer)}</div>
-          <div>{this.formatTime(this.state.break)}</div>
+          <div className="timer">{this.formatTime(this.state.timer)}</div>
+          <div className="timer">{this.formatTime(this.state.break)}</div>
         </div>
-        <div className="controls">
-          <button onClick={this.startPomodoro} className="btn sq-button">Start Pomodoro!</button>
-          <button onClick={this.pauseButton} className="btn sq-button">Pause</button>
-          <button onClick={this.resetButton} className="btn sq-button">Reset</button>
+        <div className="timer-controls">
+          <button onClick={this.startPomodoro} className="sq-button">Start</button>
+          <button onClick={this.pauseButton} className="sq-button">Pause</button>
+          <button onClick={this.resetButton} className="sq-button">Reset</button>
         </div>
         <div>
           <audio id="work" preload="auto" src="https://tinyurl.com/k6nb3zu"/>
