@@ -5,16 +5,18 @@ class Pomodoro extends React.Component {
     super(props);
     this.state = {
       timer: 3,
-      break: 300
+      break: 3
     };
 
     // bind helpers i.e. allows use of 'this' for custom methods
     this.startPomodoro = this.startPomodoro.bind(this);
     this.countdownPomodoro = this.countdownPomodoro.bind(this);
+    this.startBreak = this.startBreak.bind(this);
+    this.countdownBreak = this.countdownBreak.bind(this);
   }
 
   startPomodoro() {
-    this.timerID = setInterval(
+    this.pTimerID = setInterval(
       () => this.countdownPomodoro(),
       1000
     );
@@ -22,7 +24,8 @@ class Pomodoro extends React.Component {
 
   countdownPomodoro() {
     if (this.state.timer < 1) {
-      clearInterval(this.timerID);
+      clearInterval(this.pTimerID);
+      this.startBreak();
       return;
     }
     this.setState((prevState) => ({
@@ -30,7 +33,18 @@ class Pomodoro extends React.Component {
     }));
   }
 
+  startBreak() {
+    this.bTimerID = setInterval(
+      () => this.countdownBreak(),
+      1000
+    );
+  }
+
   countdownBreak() {
+    if (this.state.break < 1) {
+      clearInterval(this.bTimerID);
+      return;
+    }
     this.setState((prevState) => ({
       break: prevState.break - 1
     }));
