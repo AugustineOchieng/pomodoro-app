@@ -4,7 +4,7 @@ class Pomodoro extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      timer: 3,
+      timer: 5,
       break: 3
     };
 
@@ -13,6 +13,8 @@ class Pomodoro extends React.Component {
     this.countdownPomodoro = this.countdownPomodoro.bind(this);
     this.startBreak = this.startBreak.bind(this);
     this.countdownBreak = this.countdownBreak.bind(this);
+    this.pauseButton = this.pauseButton.bind(this);
+    this.resetButton = this.resetButton.bind(this);
   }
 
   startPomodoro() {
@@ -50,6 +52,20 @@ class Pomodoro extends React.Component {
     }));
   }
 
+  pauseButton() {
+    clearInterval(this.pTimerID);
+    clearInterval(this.bTimerID);
+  }
+
+  resetButton() {
+    clearInterval(this.pTimerID);
+    clearInterval(this.bTimerID);
+    this.setState({
+      timer: 1500,
+      break: 300
+    })
+  }
+
   formatTime(seconds) {
     const minutes = Math.floor(seconds / 60);
     const secondsRemain = Math.round(seconds % 60);
@@ -64,6 +80,8 @@ class Pomodoro extends React.Component {
         <div>{this.formatTime(this.state.break)}</div>
         <div className="controls">
           <button onClick={this.startPomodoro} className="btn">Start Pomodoro!</button>
+          <button onClick={this.pauseButton} className="btn">Pause</button>
+          <button onClick={this.resetButton} className="btn">Reset</button>
         </div>
       </div>
 
