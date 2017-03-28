@@ -15,6 +15,10 @@ class Pomodoro extends React.Component {
     this.countdownBreak = this.countdownBreak.bind(this);
     this.pauseButton = this.pauseButton.bind(this);
     this.resetButton = this.resetButton.bind(this);
+    this.incPomodoro = this.incPomodoro.bind(this);
+    this.decPomodoro = this.decPomodoro.bind(this);
+    this.incBreak = this.incBreak.bind(this);
+    this.decBreak = this.decBreak.bind(this);
   }
 
   startPomodoro() {
@@ -66,6 +70,31 @@ class Pomodoro extends React.Component {
     })
   }
 
+  incPomodoro() {
+    this.setState((prevState) => ({
+      timer: prevState.timer + 60
+    }));
+  }
+
+  decPomodoro() {
+    this.setState((prevState) => ({
+      timer: prevState.timer - 60
+    }));
+  }
+
+  incBreak() {
+    this.setState((prevState) => ({
+      break: prevState.break + 60
+    }));
+  }
+
+  decBreak() {
+    this.setState((prevState) => ({
+      break: prevState.break - 60
+    }));
+  }
+
+
   formatTime(seconds) {
     const minutes = Math.floor(seconds / 60);
     const secondsRemain = Math.round(seconds % 60);
@@ -75,13 +104,21 @@ class Pomodoro extends React.Component {
   render() {
     return (
       <div>
-        <div className="default">Pomodoro Timer</div>
-        <div>{this.formatTime(this.state.timer)}</div>
-        <div>{this.formatTime(this.state.break)}</div>
         <div className="controls">
-          <button onClick={this.startPomodoro} className="btn">Start Pomodoro!</button>
-          <button onClick={this.pauseButton} className="btn">Pause</button>
-          <button onClick={this.resetButton} className="btn">Reset</button>
+          <button onClick={this.incPomodoro} className="btn round-btn">+ P</button>
+          <button onClick={this.decPomodoro} className="btn round-btn">- P</button>
+          <button onClick={this.incBreak} className="btn round-btn">+ B</button>
+          <button onClick={this.decBreak} className="btn round-btn">- B</button>
+        </div>
+        <div className="display-timer">
+          <div>Pomodoro Timer</div>
+          <div>{this.formatTime(this.state.timer)}</div>
+          <div>{this.formatTime(this.state.break)}</div>
+        </div>
+        <div className="controls">
+          <button onClick={this.startPomodoro} className="btn sq-button">Start Pomodoro!</button>
+          <button onClick={this.pauseButton} className="btn sq-button">Pause</button>
+          <button onClick={this.resetButton} className="btn sq-button">Reset</button>
         </div>
       </div>
 
