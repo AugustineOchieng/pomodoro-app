@@ -4,25 +4,34 @@ class Pomodoro extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      timer: 1500,
+      timer: 3,
       break: 300
     };
+
+    // bind helpers i.e. allows use of 'this' for custom methods
+    this.startPomodoro = this.startPomodoro.bind(this);
+    this.countdownPomodoro = this.countdownPomodoro.bind(this);
   }
 
-  componentDidMount() {
+  startPomodoro() {
     this.timerID = setInterval(
-      () => this.countdown(),
+      () => this.countdownPomodoro(),
       1000
     );
   }
 
-  componentWillUnmount() {
-    clearInterval(this.timerID);
+  countdownPomodoro() {
+    if (this.state.timer < 1) {
+      clearInterval(this.timerID);
+      return;
+    }
+    this.setState((prevState) => ({
+      timer: prevState.timer - 1
+    }));
   }
 
-  countdown() {
+  countdownBreak() {
     this.setState((prevState) => ({
-      timer: prevState.timer - 1,
       break: prevState.break - 1
     }));
   }
@@ -39,6 +48,9 @@ class Pomodoro extends React.Component {
         <div className="default">Pomodoro Timer</div>
         <div>{this.formatTime(this.state.timer)}</div>
         <div>{this.formatTime(this.state.break)}</div>
+        <div className="controls">
+          <button onClick={this.startPomodoro} className="btn">Start Pomodoro!</button>
+        </div>
       </div>
 
     )
